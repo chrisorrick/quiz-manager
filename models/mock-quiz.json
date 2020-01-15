@@ -1,0 +1,68 @@
+{
+  "name": "Test Quiz",
+  "questions": [
+    {
+      "question": "Question 1",
+      "options": [
+        {
+          "option": "Option 1",
+          "answer": 1
+        },
+        {
+          "option": "Option 2",
+          "answer": 0
+        },
+        {
+          "option": "Option 3",
+          "answer": 0
+        },
+        {
+          "option": "Option 4",
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "question": "Question 2",
+      "options": [
+        {
+          "option": "Option 1",
+          "answer": 0
+        },
+        {
+          "option": "Option 2",
+          "answer": 0
+        },
+        {
+          "option": "Option 3",
+          "answer": 1
+        },
+        {
+          "option": "Option 4",
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "question": "Question 3",
+      "options": [
+        {
+          "option": "Option 1",
+          "answer": 0
+        },
+        {
+          "option": "Option 2",
+          "answer": 1
+        },
+        {
+          "option": "Option 3",
+          "answer": 0
+        },
+        {
+          "option": "Option 4",
+          "answer": 0
+        }
+      ]
+    }
+  ]
+}

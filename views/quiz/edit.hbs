@@ -1,0 +1,48 @@
+<div class="quiz-management-page">
+  <form class="" action="/app/quiz/edit/{{quiz._id}}" method="post">
+    <div class="title">
+      <div class="input-container">
+        <label for="name">Name</label>
+        <input type="text" name="name" class="text-input" placeholder="Quiz name" value="{{quiz.name}}" required>
+      </div>
+      <div>
+        <a href="/app/quiz/view/{{quiz._id}}">Cancel</a>
+        <button type="submit" name="button" class="btn">Save</button>
+      </div>
+    </div>
+
+    <div class="questions-container">
+      {{#each quiz.questions}}
+        <div class="question-container card {{#unless editShowDeleteBtn}}four-children{{/unless}}">
+          <div class="input-container bottom">
+            <div>
+              <label for="question">Question</label>
+              <input type="text" name="question[]" class="text-input question" placeholder="Question" value="{{question}}" required>
+            </div>
+            <i class="fas fa-trash-alt" onclick="createQuiz.deleteQuestion(this)"></i>
+          </div>
+          
+          <div class="options-container">
+            {{#each options}}
+              <div class="option-container">
+                <div class="input-container bottom">
+                  <div>
+                    <label for="option">Option</label>
+                    <input type="text" name="option[{{@../index}}][]" class="text-input" placeholder="Option" value="{{option}}" required>
+                  </div>
+                  <input type="checkbox" name="answer[{{@../index}}][]" class="checkbox-input" value="{{@index}}" {{#if answer}}checked{{/if}}>
+                  <i class="fas fa-trash-alt" onclick="createQuiz.deleteOption(this)"></i>
+                </div>
+                
+              </div>
+            {{/each}}
+            <div class="add-option-btn">
+              <button type="button" name="addOption" onclick="createQuiz.addOption(this, {{@index}})"><i class="fas fa-plus"></i> Add option</button>
+            </div>
+          </div>
+        </div>  
+      {{/each}}
+      <button type="button" name="addQuestion" class="btn" onclick="createQuiz.addQuestion(this)">Add question</button>
+    </div> 
+  </form>
+ </div>

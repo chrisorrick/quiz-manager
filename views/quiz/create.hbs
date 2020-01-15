@@ -1,0 +1,63 @@
+<div class="quiz-management-page">
+  <form class="" action="/app/quiz/create" method="post">
+    <div class="title">
+      <div class="input-container">
+        <label for="name">Name</label>
+        <input type="text" name="name" class="text-input" placeholder="Quiz name" required>
+      </div>
+      <div>
+        <a href="/app">Cancel</a>
+        <button type="submit" name="button" class="btn">Create</button>
+      </div>
+    </div>
+
+    <div class="questions-container">
+      <div class="question-container card four-children">
+        <div class="input-container bottom">
+          <div>
+            <label for="question">Question</label>
+            <input type="text" name="question[]" class="text-input question" placeholder="Enter a question" required>
+          </div>
+          <i class="fas fa-trash-alt" onclick="createQuiz.deleteQuestion(this)"></i>
+        </div>
+        <div class="options-container">
+          <div class="option-container">
+            <div class="input-container bottom">
+              <div>
+                <label for="option">Option</label>
+                <input type="text" name="option[0][]" class="text-input" placeholder="Option" required>
+              </div>
+              <input type="checkbox" name="answer[0][]" class="checkbox-input" value="0">
+              <i class="fas fa-trash-alt" onclick="createQuiz.deleteOption(this)"></i>
+            </div>
+          </div>
+          <div class="option-container">
+            <div class="input-container bottom">
+              <div>
+                <label for="option">Option</label>
+                <input type="text" name="option[0][]" class="text-input" placeholder="Option" required>
+              </div>
+              <input type="checkbox" name="answer[0][]" class="checkbox-input" value="1">
+              <i class="fas fa-trash-alt" onclick="createQuiz.deleteOption(this)"></i>
+            </div>
+          </div>
+          <div class="option-container">
+            <div class="input-container bottom">
+              <div>
+                <label for="option">Option</label>
+                <input type="text" name="option[0][]" class="text-input" placeholder="Option" required>
+              </div>
+              <input type="checkbox" name="answer[0][]" class="checkbox-input" value="2">
+              <i class="fas fa-trash-alt" onclick="createQuiz.deleteOption(this)"></i>
+            </div>
+          </div>
+          <div class="add-option-btn">
+            <button type="button" name="addOption" onclick="createQuiz.addOption(this, 0)"><i class="fas fa-plus"></i> Add option</button>
+          </div>
+        </div>
+      </div>
+      
+      <button type="button" name="addQuestion" class="btn" onclick="createQuiz.addQuestion(this)">Add question</button>
+    </div> 
+  </form>
+ </div>

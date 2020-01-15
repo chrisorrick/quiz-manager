@@ -1,0 +1,19 @@
+<div class="title">
+  <h1>{{quiz.name}}</h1>
+  {{#if editQuiz}}
+    <a href="/app/quiz/edit/{{quiz._id}}" class="btn">Edit Quiz</a>
+  {{/if}}
+</div>
+
+<div class="card-container">
+  {{#each quiz.questions}}
+    <div class="card">
+      <h2>{{question}}</h2>
+      <ol class="options" type="A">
+        {{#each options}}
+          <li {{#if ../../viewAnswers}}{{#if answer}}style="color: green;"{{/if}}{{/if}}>{{option}}</li>
+        {{/each}}
+      </ol>
+    </div>
+  {{/each}}
+</div>

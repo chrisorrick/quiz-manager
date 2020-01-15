@@ -1,0 +1,19 @@
+<div class="title">
+  <h1>My quizzes</h1>
+  {{#if editQuiz}}
+    <a href="app/quiz/create" class="btn">Create quiz</a>
+  {{/if}}
+</div>
+
+<div class="card-container">
+  {{#each quizzes}}
+    <div class="card">
+      <h2>{{name}}</h2>
+      <p>{{noOfQuestions}}</p>
+      <a href="/app/quiz/view/{{_id}}" class="btn">View quiz</a>
+      {{#if ../editQuiz}}
+        <a href="/app/quiz/edit/{{_id}}">Edit</a>
+      {{/if}}
+    </div>
+  {{/each}}
+</div>
