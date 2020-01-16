@@ -151,4 +151,12 @@ router.post('/edit/:id', [ middleware.isLoggedIn, middleware.editPermissionCheck
   .catch(err => console.log(err));
 });
 
+router.get('/delete/:id', [ middleware.isLoggedIn, middleware.editPermissionCheck ], function (req, res) {
+  Quiz.deleteOne({_id: req.params.id})
+  .then(quizReturned => quizReturned)
+  .catch(error => error);
+  
+  res.redirect('/app');
+});
+
 module.exports = router;

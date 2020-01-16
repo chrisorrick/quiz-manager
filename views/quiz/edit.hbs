@@ -1,9 +1,12 @@
 <div class="quiz-management-page">
   <form class="" action="/app/quiz/edit/{{quiz._id}}" method="post">
     <div class="title">
-      <div class="input-container">
-        <label for="name">Name</label>
-        <input type="text" name="name" class="text-input" placeholder="Quiz name" value="{{quiz.name}}" required>
+      <div class="input-container bottom">
+        <div>
+          <label for="name">Name</label>
+          <input type="text" name="name" class="text-input" placeholder="Quiz name" value="{{quiz.name}}" required>
+        </div>
+        <i class="fas fa-trash-alt" onclick="location.href='/app/quiz/delete/{{quiz._id}}'"></i>
       </div>
       <div>
         <a href="/app/quiz/view/{{quiz._id}}">Cancel</a>
