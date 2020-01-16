@@ -54,6 +54,7 @@ mongoose.connect('mongodb://localhost/quiz-manager', {
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));
 
-app.listen(3000, function () {
-  console.log('App listening on port 3000!');
+const port = 3000;
+app.listen(port, function () {
+  console.log(`App listening on port ${port}`);
 });
