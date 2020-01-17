@@ -16,6 +16,9 @@
 
     <div class="questions-container">
       {{#each quiz.questions}}
+        <div class="add-mid-question" onclick="createQuiz.addQuestion(this, -1)">
+          <p><i class="fas fa-plus"></i> Add question</p>
+        </div>
         <div class="question-container card {{#unless editShowDeleteBtn}}four-children{{/unless}}">
           <div class="input-container bottom">
             <div>

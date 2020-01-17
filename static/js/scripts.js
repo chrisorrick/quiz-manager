@@ -1,7 +1,11 @@
 const createQuiz = {
-  addQuestion: element => {
-    const index = Array.from(element.parentNode.children).indexOf(element);
+  addQuestion: (element, offset = 0) => {
+    const index = Array.from(element.parentNode.children).indexOf(element) + offset;
+
     const questionMarkup = `
+    <div class="add-mid-question" onclick="createQuiz.addQuestion(this, -1)">
+      <p><i class="fas fa-plus"></i> Add question</p>
+    </div>
     <div class="question-container card four-children">
       <div class="input-container bottom">
         <div>
@@ -46,8 +50,11 @@ const createQuiz = {
         </div>
       </div>
     </div>
-  `;
-  return element.insertAdjacentHTML('beforebegin', questionMarkup)
+    `;
+    element.insertAdjacentHTML('beforebegin', questionMarkup)
+
+    const questionsContainer = element.closest('.questions-container');
+    createQuiz.indexQuestions(questionsContainer)
   },
   addOption: (element, questionIndex) => {
     const questionContainer = element.closest('.question-container');
@@ -73,20 +80,12 @@ const createQuiz = {
   },
   deleteQuestion: deleteButton => {
     const questionsContainer = deleteButton.closest('.questions-container');
-
-    deleteButton.closest('.question-container').remove();
-
-    const questionsContainerChildren = [ ...questionsContainer.childNodes ]
-    let index = 0;
-
-    for(const element of questionsContainerChildren) {
-      if(element.classList && element.classList.contains('question-container')) {
-        for(const inputField of element.querySelectorAll('.text-input.option, .checkbox-input')) {
-          inputField.type === 'text' ? inputField.name = `option[${index}][]` : inputField.name = `answer[${index}][]`
-        }
-        index++
-      }
-    }
+    const questionContainer = deleteButton.closest('.question-container');
+    console.log(questionContainer);
+    console.log(questionContainer.previousSibling);
+    createQuiz.getPreviousSiblingWithClass(questionContainer, '.add-mid-question').remove();
+    questionContainer.remove();
+    createQuiz.indexQuestions(questionsContainer)
   },
   deleteOption: deleteButton => {
     const questionContainer = deleteButton.closest('.question-container');
@@ -104,6 +103,34 @@ const createQuiz = {
         element.getElementsByClassName('checkbox-input')[0].value = index
         index++
       }
+    }
+  },
+  indexQuestions: questionsContainer => {
+    const questionsContainerChildren = [ ...questionsContainer.childNodes ]
+    let index = 0;
+    for(const element of questionsContainerChildren) {
+      if(element.classList && element.classList.contains('question-container')) {
+        for(const inputField of element.querySelectorAll('.text-input.option, .checkbox-input, [name=addOption]')) {
+          if(inputField.type === 'text') {
+            inputField.name = `option[${index}][]`
+          }
+          if(inputField.type === 'checkbox') {
+            inputField.name = `answer[${index}][]`
+          }
+          if(inputField.type === 'button') {
+            inputField.setAttribute('onclick', `createQuiz.addOption(this, ${index})`)
+          }
+        }
+        index++
+      }
+    }
+  },
+  getPreviousSiblingWithClass(element, selector) {
+    const sibling = element.previousElementSibling;
+    if (!selector) return sibling;
+    while (sibling) {
+      if (sibling.matches(selector)) return sibling;
+      sibling = sibling.previousElementSibling;
     }
   }
 }

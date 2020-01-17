@@ -391,3 +391,23 @@ form label {
 .options-container .option-container {
   width: 33%;
 }
+
+.add-mid-question {
+  opacity: 0.4;
+  padding: 1px 0px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.add-mid-question:hover {
+  padding: 5px 0px;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.add-mid-question p {
+  text-align: center;
+  color: var(--secondary-color-light);
+  font-size: 10pt;
+}
