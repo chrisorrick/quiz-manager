@@ -76,13 +76,10 @@ const createQuiz = {
     </div>
   `;
   return element ? element.parentNode.insertAdjacentHTML('beforebegin', optionMarkup) : optionMarkup
-  
   },
   deleteQuestion: deleteButton => {
     const questionsContainer = deleteButton.closest('.questions-container');
     const questionContainer = deleteButton.closest('.question-container');
-    console.log(questionContainer);
-    console.log(questionContainer.previousSibling);
     createQuiz.getPreviousSiblingWithClass(questionContainer, '.add-mid-question').remove();
     questionContainer.remove();
     createQuiz.indexQuestions(questionsContainer)
