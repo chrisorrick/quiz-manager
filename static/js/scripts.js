@@ -15,7 +15,7 @@ const createQuiz = {
           <div class="input-container bottom">
             <div>
               <label for="option">Option</label>
-              <input type="text" name="option[${index}][]" class="text-input" placeholder="Option" required>
+              <input type="text" name="option[${index}][]" class="text-input option" placeholder="Option" required>
             </div>
             <input type="checkbox" name="answer[${index}][]" class="checkbox-input" value="0">
             <i class="fas fa-trash-alt" onclick="createQuiz.deleteOption(this)"></i>
@@ -25,7 +25,7 @@ const createQuiz = {
           <div class="input-container bottom">
             <div>
               <label for="option">Option</label>
-              <input type="text" name="option[${index}][]" class="text-input" placeholder="Option" required>
+              <input type="text" name="option[${index}][]" class="text-input option" placeholder="Option" required>
             </div>
             <input type="checkbox" name="answer[${index}][]" class="checkbox-input" value="1">
             <i class="fas fa-trash-alt" onclick="createQuiz.deleteOption(this)"></i>
@@ -35,7 +35,7 @@ const createQuiz = {
           <div class="input-container bottom">
             <div>
               <label for="option">Option</label>
-              <input type="text" name="option[${index}][]" class="text-input" placeholder="Option" required>
+              <input type="text" name="option[${index}][]" class="text-input option" placeholder="Option" required>
             </div>
             <input type="checkbox" name="answer[${index}][]" class="checkbox-input" value="2">
             <i class="fas fa-trash-alt" onclick="createQuiz.deleteOption(this)"></i>
@@ -61,7 +61,7 @@ const createQuiz = {
       <div class="input-container bottom">
         <div>
           <label for="option">Option</label>
-          <input type="text" name="option[${questionIndex}][]" class="text-input" placeholder="Option" required>
+          <input type="text" name="option[${questionIndex}][]" class="text-input option" placeholder="Option" required>
         </div>
         <input type="checkbox" name="answer[${questionIndex}][]" class="checkbox-input" value="${index}">
         <i class="fas fa-trash-alt" onclick="createQuiz.deleteOption(this)"></i>
@@ -72,7 +72,21 @@ const createQuiz = {
   
   },
   deleteQuestion: deleteButton => {
-    return deleteButton.closest('.question-container').remove();
+    const questionsContainer = deleteButton.closest('.questions-container');
+
+    deleteButton.closest('.question-container').remove();
+
+    const questionsContainerChildren = [ ...questionsContainer.childNodes ]
+    let index = 0;
+
+    for(const element of questionsContainerChildren) {
+      if(element.classList && element.classList.contains('question-container')) {
+        for(const inputField of element.querySelectorAll('.text-input.option, .checkbox-input')) {
+          inputField.type === 'text' ? inputField.name = `option[${index}][]` : inputField.name = `answer[${index}][]`
+        }
+        index++
+      }
+    }
   },
   deleteOption: deleteButton => {
     const questionContainer = deleteButton.closest('.question-container');
@@ -83,12 +97,10 @@ const createQuiz = {
     deleteButton.closest('.option-container').remove();
     
     const optionsContainerChildren = [ ...optionsContainer.childNodes ]
-    let optionContainers = [];
     let index = 0;
 
     for(const element of optionsContainerChildren) {
       if(element.className === 'option-container') {
-        optionContainers = [ ...optionContainers, element]
         element.getElementsByClassName('checkbox-input')[0].value = index
         index++
       }

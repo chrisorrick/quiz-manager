@@ -31,7 +31,7 @@
                 <div class="input-container bottom">
                   <div>
                     <label for="option">Option</label>
-                    <input type="text" name="option[{{@../index}}][]" class="text-input" placeholder="Option" value="{{option}}" required>
+                    <input type="text" name="option[{{@../index}}][]" class="text-input option" placeholder="Option" value="{{option}}" required>
                   </div>
                   <input type="checkbox" name="answer[{{@../index}}][]" class="checkbox-input" value="{{@index}}" {{#if answer}}checked{{/if}}>
                   <i class="fas fa-trash-alt" onclick="createQuiz.deleteOption(this)"></i>
